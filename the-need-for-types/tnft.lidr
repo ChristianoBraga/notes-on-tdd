@@ -301,6 +301,8 @@ We should write `negate b` instead of `- b`, as `-` is a _binary_
 operation only in Idris. Moreover, we should _not_ be able to negate a
 natural number! Again, casting is necessary.
 
+#### Bhaskara: final attempt
+
 Let us fix all casting problem at once, the final definitions should be as follows:
 ```idris
 delta : (a :  Nat) -> (b : Nat) -> (c : Nat) -> Int
@@ -336,63 +338,52 @@ Main.bhask is Total
 Our intentions in this chapter are manifold:
 
 1. First and foremost motivate strong-typing in Idris.
-1. Introduce notation for functions in Idris:
-  1. The signature of a function, sych as `delta`:
-    - A function declaration has a name, formal parameters and a
-      return type, such as `delta`.  
-      ```
-      delta : (a : Nat) -> (b : Nat) -> (c : Nat) -> Int
-      ```
-    - Currying
-    The formal parameters of a function are declared using the
-    so-called Currying form (after Haskell Curry): currying is the
-    technique of translating the evaluation of a function that takes
-    multiple arguments into evaluating a sequence of functions, each
-    with a single argument.  
-    This allows to _partially apply_ a function! For instance, we can
-    call `delta 1 2`. This will produce a function that expects a
-    number and then behaves as `delta`.
-	
-    Take a look at the following session:    
-    ```idris
-    *bhask-fun-fix> delta
-    delta : Nat -> Nat -> Nat -> Int
-    *bhask-fun-fix> delta 1
-    delta 1 : Nat -> Nat -> Int
-    *bhask-fun-fix> delta 1 2
-    delta 1 2 : Nat -> Int
-    *bhask-fun-fix> delta 1 2 3
-    -8 : Int
-    *bhask-fun-fix> (delta 1) 2
-    delta 1 2 : Nat -> Int
-    *bhask-fun-fix> ((delta 1) 2) 3
-    -8 : Int
-    ```
-    At the end of the day, `delta 1 2 3` is just _syntax sugar_ for `((delta 1) 2) 3`.
-  1. Total functions. From Idris' FAQ:
+1. Introduce notation for functions in Idris. The signature of a function, such as `delta` includes a name, formal parameters and a return type, such as:    
+`delta : (a : Nat) -> (b : Nat) -> (c : Nat) -> Int`.
+1. Currying. The formal parameters of a function are declared using
+the so-called Currying form (after Haskell Curry): currying is the
+technique of translating the evaluation of a function that takes
+multiple arguments into evaluating a sequence of functions, each
+with a single argument.  This allows to _partially apply_ a
+function! For instance, we can call `delta 1 2`. This will produce
+a function that expects a number and then behaves as `delta`.
+Take a look at the following session:
 
-     I have an obviously terminating program, but Idris says it possibly
-     isn’t total. Why is that?
-
-     Idris can’t decide in general whether a program is terminating due to
-	 the undecidability of the Halting Problem. It is possible, however, to
-	 identify some programs which are definitely terminating. Idris does
-	 this using “size change termination” which looks for recursive paths
-	 from a function back to itself. On such a path, there must be at least
-	 one argument which converges to a base case.
-
-		- Mutually recursive functions are supported
-		- However, all functions on the path must be fully applied. In
-		particular, higher order applications are not supported
-		- Idris identifies arguments which converge to a base case by
-		looking for recursive calls to syntactically smaller arguments
-		of inputs. e.g. $k$ is syntactically smaller than $S (S k)$ because
-		$k$ is a subterm of $S (S k)$, but $(k, k)$ is not syntactically
-		smaller than $(S k, S k)$.
-
-  1. Type casting. We have used `cast` many times in order to _inject_ our values from one type into another.
-
-  1. Some Read-Eval-Print-Loop (REPL) commands. We have seen how to
+   ```idris
+   *bhask-fun-fix> delta
+   delta : Nat -> Nat -> Nat -> Int
+   *bhask-fun-fix> delta 1
+   delta 1 : Nat -> Nat -> Int
+   *bhask-fun-fix> delta 1 2
+   delta 1 2 : Nat -> Int
+   *bhask-fun-fix> delta 1 2 3
+   -8 : Int
+   *bhask-fun-fix> (delta 1) 2
+   delta 1 2 : Nat -> Int
+   *bhask-fun-fix> ((delta 1) 2) 3
+   -8 : Int
+  ```
+At the end of the day, `delta 1 2 3` is just _syntax sugar_ for
+  `((delta 1) 2) 3`.  
+1. Total functions. From Idris' FAQ:
+"I have an obviously terminating program, but Idris says it possibly
+isn’t total. Why is that?  
+Idris can’t decide in general whether a program is terminating due to
+the undecidability of the Halting Problem. It is possible, however, to
+identify some programs which are definitely terminating. Idris does
+this using “size change termination” which looks for recursive paths
+from a function back to itself. On such a path, there must be at least
+one argument which converges to a base case.
+Mutually recursive functions are supported. 
+However, all functions on the path must be fully applied. In
+particular, higher order applications are not supported
+Idris identifies arguments which converge to a base case by
+looking for recursive calls to syntactically smaller arguments
+of inputs. e.g. $k$ is syntactically smaller than $S (S k)$ because
+$k$ is a subterm of $S (S k)$, but $(k, k)$ is not syntactically
+smaller than $(S k, S k)$.
+1. Type casting. We have used `cast` many times in order to _inject_ our values from one type into another.
+1. Some Read-Eval-Print-Loop (REPL) commands. We have seen how to
      load a file with `:l`, check its type with `:t`, and check
      weather a function is total or not with `:total`.
   

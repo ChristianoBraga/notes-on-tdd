@@ -18,8 +18,9 @@ is available in the Idris language.
 ## Formatted output example
 
 This examples explores some of the components for the RPA scenario. It
-explores how to make strings from properly-typed data using
-type-functions.
+exemplifies how to make strings from properly-typed data using
+type-functions, similarly to the `printf` function in the C
+programming language.
 
 ```idris
 
@@ -33,11 +34,25 @@ type-functions.
 
 ```
 
+The `Format` datatype is an _inductive_ one: is a "list" such that its
+elements are either `Number`, `Str`, `Lit s` (where `s` is string) or
+`End`. It will be used to _encode_, or to represent, in Idris, a
+formatting string.
+
 Try this at the REPL:
 ```idris
 *pwfct> Str (Lit " = " (Number End))
 Str (Lit " = " (Number End)) : Format
 ```
+
+This instance of `Format` represents the formatting string "%s = %d"
+in C's `printf`.
+
+So far, nothing new, despite the fact that we now realize that our
+datatypes can be recursive.
+ 
+Function `PrintfType` is a _type-level function_. It describes the
+_functional type_ associated with a format. 
 
 ```idris
 
@@ -49,11 +64,27 @@ Str (Lit " = " (Number End)) : Format
 
 ```
 
+Recall that a functional type is built using the `->` constructor. The
+first equation declares that a `Number` format is denoted by an `Int`
+in the associated type. The remaining equations define similar
+denotations.
+
 Try this at the REPL:
 ```idris
 *pwfct> PrintfType (Str (Lit " = " (Number End)))
 String -> Int -> String : Type
 ```
+
+As I mentioned before, the format `(Str (Lit " = " (Number End)))`
+encodes the C formatting string "%s = %d". The functional type that
+denotes it is `String -> Int -> String`, that is, a function that
+receives a string and an integer and returns a string.
+
+Again, `PrintfType` is a type-function, that is, it defines a type. Of
+course, we can use it to specify, for instance, the return type of a
+function. The recursive function `printfFmt` receives a format, a
+string and returns a term of `PrintfType` that _depends on the format
+given as first argument_!
 
 ```idris
 
