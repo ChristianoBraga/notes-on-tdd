@@ -2,7 +2,7 @@
 
 Overflow conditions in software appear to be a simple thing to
 implement. An important counter-example is the Ariane 5 rocket that
-exploded due to a down cast from 64-bit number into a 16-bit one. 
+exploded due to a down cast from 64-bit number into a 16-bit one.
 \begin{quote}
 The Ariane 5 had cost nearly \$8 billion to develop, and was carrying a \$500 million satellite payload when it exploded.
 \end{quote}
@@ -53,7 +53,7 @@ and let us think about it for a moment.
 
 Types are defined in terms of constructor operators. This means that
 an _instance_ of this type is written down as `1 :: Vect.Nil`. In a
-procedural language you could write it with a code similar to 
+procedural language you could write it with a code similar to
 ```python
 v = insert(1, createVect(1))
 ```
@@ -91,7 +91,7 @@ of this datatype. Cool! And so what?
 
 We can take advantage of that while programming. We could write a
 function that does _not_, under no circumstances, goes beyond the limits
-of a vector, that is, index it beyond its range! 
+of a vector, that is, index it beyond its range!
 
 #### The `zip` function
 
@@ -116,7 +116,7 @@ handles two _non-empty_ vectors, specified by the _pattern_ `x :: xs`,
 that is, a vector whose first element is `x` and its remaining
 elements are represented by a (sub)vector `xs`.
 
-For instance, if we could write 
+For instance, if we could write
 ```idris
 *tnfdt> Vect.zip [1,2,3] ["a", "b", "c"]
 [(1, "a"), (2, "b"), (3, "c")] : Vect 3 (Integer, String)
@@ -128,7 +128,7 @@ Idris' standard library.) Note that the type of `[(1, "a"), (2, "b"),
 vector and `(Integer, String)`, denoting pairs of integers and
 strings, is the type of the elements of vector that `zip` calculates.
 
-Note some additional interesting things about `zip`'s declaration: 
+Note some additional interesting things about `zip`'s declaration:
 - The signature of `zip` is
 `zip : Vect n a -> Vect n b -> Vect n (a, b)`. The variable `n` here
 stands for the size of the vector. Variables `a` and `b` denote the
@@ -161,7 +161,7 @@ second vector).
 
 **In Idris, types can be manipulated just like any other language construct.**
 
-### Conclusion. 
+### Conclusion.
 
 Ariane 5 would not have exploded (from the bit
 conversion perspective) if the function that accidentally

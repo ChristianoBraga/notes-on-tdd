@@ -141,7 +141,7 @@ Splits a string into a list of whitespace separated strings.
 It turns out that `words` is exactly what I was looking for!
 Run the following:
 ```idris
-*type-define-refine/tdr> :let l = "Here we are, born to be kings, 
+*type-define-refine/tdr> :let l = "Here we are, born to be kings,
  we are princess of the universe!"
 *type-define-refine/tdr> words l
 ["Here",
@@ -175,16 +175,28 @@ The first lab is to complete the code below using what we have discussed so far.
 ```idris
 
 > wordCount : String -> Nat
-> wordCount str = length (words str)
+> -- Type-define-refine this function!
+> -- Start by running `Ctrl+Alt+A` to add a definition, than `Ctrl+Alt+C`
+> -- to split cases and finally `Ctrl+Alt+S` to search for proofs(!) that represent
+> -- the code you need! (Intrigued? Ask the instructor for an advanced course on
+> -- this topic than = ) 
 >
 > average : (str : String) -> Double
 > average str = let numWords = wordCount str
 >                   totalLength = sum (allLengths (words str))
->                in cast totalLength / cast numWords
+>               in ?w
+> -- Which is the type of `?w1`?
+> -- Proof search won't help you here, unfortunately...
+> -- Run `:doc sum` at the REPL. Just read the documentation at the moment,
+> -- not the type of `sum`.
 >
 > showAverage : String -> String
-> showAverage str = "The average word length is: " ++
->                            show (average str) ++ "\n"
+> showAverage str =
+>   let m = "The average word length is: "
+>       a = average ?w
+>   in m ++ show (a) ++ "\n"
+> -- Check the type o `w` and think about it!
+>
 > main : IO ()
 > main = repl "Enter a string: " showAverage
 
