@@ -22,11 +22,15 @@ slides:
 	-V institute:"Universidade Federal Fluminense" \
         -o notes-on-tdd-slides.pdf
 
-check: check-tnft
-
-check-tnft:
+check: 
 	- idris --check the-need-for-types/tnft.lidr
+	@echo ==============================================
+	@echo Checking for tnft.lidr should give an error...
+	@echo ==============================================
+	- idris --check type-define-refine/tdr.lidr
 	- idris --check the-need-for-dependent-types/tnfdt.lidr
+	- idris --check insertion-sort/is.lidr
+	- idris --check programming-with-first-class-types/pwfct.lidr
 
 
 

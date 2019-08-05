@@ -1,23 +1,23 @@
 
-# Programming with type-level functions
+# Programming with type-level functions {.allowframebreaks}
 
-Here are a couple of examples where first-class types can be useful:
-- Given an HTML form on a web page, you can calculate the type of a function to process inputs in the form.
-- Given a database schema, you can calculate types for queries on that
+- Here are a couple of examples where first-class types can be useful:
+  - Given an HTML form on a web page, you can calculate the type of a function to process inputs in the form.
+  - Given a database schema, you can calculate types for queries on that
   database. In other words, the type of a value returned by a database
   query may vary _depending on_ the database _schema_ and the _query_
   itself, calculated by **type-level functions**.
 
-This should be useful in a number of contexts such as Data validation
+- This should be useful in a number of contexts such as Data validation
 in Robotic Process Automation, SQL Injection, (Business) Process
 Protocol Validation, just to name a few.
 
-In this section we discuss and illustrate how this way of programming
+- In this section we discuss and illustrate how this way of programming
 is available in the Idris language.
 
-## Formatted output example
+## Formatted output example {.allowframebreaks}
 
-This examples explores some of the components for the RPA scenario. It
+- This examples explores some of the components for the RPA scenario. It
 exemplifies how to make strings from properly-typed data using
 type-functions, similarly to the `printf` function in the C
 programming language.
@@ -34,24 +34,24 @@ programming language.
 
 ```
 
-The `Format` datatype is an _inductive_ one: is a "list" such that its
+- The `Format` datatype is an _inductive_ one: is a "list" such that its
 elements are either `Number`, `Str`, `Lit s` (where `s` is string) or
 `End`. It will be used to _encode_, or to represent, in Idris, a
 formatting string.
 
-Try this at the REPL:
+- Try this at the REPL:
 ```idris
 *pwfct> Str (Lit " = " (Number End))
 Str (Lit " = " (Number End)) : Format
 ```
 
-This instance of `Format` represents the formatting string "%s = %d"
+- This instance of `Format` represents the formatting string "%s = %d"
 in C's `printf`.
 
-So far, nothing new, despite the fact that we now realize that our
+- So far, nothing new, despite the fact that we now realize that our
 datatypes can be recursive.
  
-Function `PrintfType` is a _type-level function_. It describes the
+- Function `PrintfType` is a _type-level function_. It describes the
 _functional type_ associated with a format. 
 
 ```idris
@@ -64,23 +64,23 @@ _functional type_ associated with a format.
 
 ```
 
-Recall that a functional type is built using the `->` constructor. The
+- Recall that a functional type is built using the `->` constructor. The
 first equation declares that a `Number` format is denoted by an `Int`
 in the associated type. The remaining equations define similar
 denotations.
 
-Try this at the REPL:
+- Try this at the REPL:
 ```idris
 *pwfct> PrintfType (Str (Lit " = " (Number End)))
 String -> Int -> String : Type
 ```
 
-As I mentioned before, the format `(Str (Lit " = " (Number End)))`
+- As I mentioned before, the format `(Str (Lit " = " (Number End)))`
 encodes the C formatting string "%s = %d". The functional type that
 denotes it is `String -> Int -> String`, that is, a function that
 receives a string and an integer and returns a string.
 
-Again, `PrintfType` is a type-function, that is, it defines a type. Of
+- Again, `PrintfType` is a type-function, that is, it defines a type. Of
 course, we can use it to specify, for instance, the return type of a
 function. The recursive function `printfFmt` receives a format, a
 string and returns a term of `PrintfType` that _depends on the format
@@ -96,6 +96,8 @@ given as first argument_!
 
 ```
 
+- Function `toFormat` is a normal function that transforms a string denoting a format and creates a _type_ `Format`. Function `printf` is defined next.
+
 ```idris
 
 > toFormat : (xs : List Char) -> Format
@@ -106,17 +108,12 @@ given as first argument_!
 > toFormat (c :: chars) = case toFormat chars of
 >                             Lit lit chars' => Lit (strCons c lit) chars'
 >                             fmt => Lit (strCons c "") fmt
-
-```
-
-```idris                           
-
 > printf : (fmt : String) -> PrintfType (toFormat (unpack fmt))
 > printf fmt = printfFmt _ ""
 
 ```
 
-Try this out at the REPL:
+- Try this out at the REPL:
 ```idris
 *pwfct> :let msg = "The author of %s, published in %d, is %s."
 *pwfct> :let b = "A Brief History of Time"
@@ -126,15 +123,29 @@ Try this out at the REPL:
 "The author of A Brief History of Time, published in 1988, is Stephen Hawking." : String
 ```
 
-For variable `y` we had to make sure it is an `Int` (finite), not an
+- At this point you should be able `=(` to understand what is going
+  on. Why does `printf` takes four arguments? Shouldn't it be just
+  one? (The `fmt : String` above.)
+
+- For variable `y` we had to make sure it is an `Int` (finite), not an
 `Integer` (infinite) number, due to `PrintfType` definition. This is
 what `the Int 1988` does. Try it without the casting and see what
 happens...
 
-## Caveats
+## Conclusion
+
+- The point here is that we can use types to help organize the
+world. 
+
+- Recall the SQL Injection example from the introductory section. The problem there was the fact that everything was a string. 
+
+- Using the concepts discussed here we could type information coming
+from forms and check them before sending them to the DBMS!
+
+## Caveats {.allowframebreaks}
 (From TDD book.)
 
-In general, it’s best to consider type-level functions in exactly the
+- In general, it’s best to consider type-level functions in exactly the
 same way as ordinary functions. This isn’t
 always the case, though. There are a couple of technical differences
 that are useful to know about: 
