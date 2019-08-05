@@ -1,4 +1,4 @@
-FILES = intro/intro.lidr \
+FILES = intro/intro.md \
 	the-need-for-types/tnft.lidr \
 	type-define-refine/tdr.lidr \
 	the-need-for-dependent-types/tnfdt.lidr \
@@ -26,6 +26,7 @@ check: check-tnft
 
 check-tnft:
 	- idris --check the-need-for-types/tnft.lidr
+	- idris --check the-need-for-dependent-types/tnfdt.lidr
 
 
 

@@ -13,12 +13,12 @@ Following the TDD book, we use the Atom editor to illustrate the process.
 (Idris defines an IDE API such that editors like Atom, Emacs or Vi can interact
 with the REPL.)
 
-## The `allLenghts` function
+## The `allLenghts` function {.allowframebreaks}
 
 Let us write a function that given a list of strings computes a list of integers
 denoting the lenght of each string in the given list.
 
-### Type
+- Type
 
 Which should be the type for `allLengths`? Our "problem statement" has alredy
 specified it so we just have to write it down:
@@ -39,7 +39,7 @@ There is no surprise with the type but there is `Hole` in our program. Obviously
 is because we did not declare the equations that define `allLenghts`. This may
 also occur when Idris fails to type-check a given program.
 
-### Define
+- Define
 
 Idris may help us think about which cases our function must handle. In the Atom
 editor, we press Ctrl+Alt+A, producing the following definition:
@@ -89,7 +89,7 @@ xs : List String
 allLenghts_rhs_2 : List Nat
 ```
 
-### Refine
+- Refine
 
 The refinement of `allLenghts_rhs_1` is trivial: Ctrl+Alt+S (_proof search_)
 on it gives us `[]`.
@@ -165,11 +165,11 @@ And Finally
 [4, 2, 4, 4, 2, 2, 6, 2, 3, 8, 2, 3, 9] : List Nat
 ```
 
-## Lab
+## Lab {.allowframebreaks}
 
 In the labs in this short-course you will have to complete or fix some Idris code.
 
-### First lab.
+- First lab.
 
 The first lab is to complete the code below using what we have discussed so far.
 ```idris
@@ -202,7 +202,7 @@ The first lab is to complete the code below using what we have discussed so far.
 
 ```
 
-Using the example string from above, you should get the following spit at you:
+- Using the example string from above, you should get the following spit at you:
 ```idris
 Sat Aug 03@18:05:17:type-define-refine$ idris --nobanner tdr.lidr
 Type checking ./tdr.lidr
@@ -211,7 +211,7 @@ Enter a string: Here we are, born to be kings, we are princess of the universe!
 The average word length is: 3.923076923076923
 ```
 
-Moreover, you may _compile it_ to an executable with the following command line:
+- Moreover, you may _compile it_ to an executable with the following command line:
 ```shell
 idris --nobanner tdr.lidr -o tdr
 ```

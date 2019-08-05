@@ -220,17 +220,20 @@ Holes: Main.delta
 
 ## Bhaskara at last! {.allowframebreaks}
 
-- Painful, no? 
+- Painful, no?   
 **No!** 
-The compiler is our _friend_ and true friends do not
-always bring us good news! Think about it using this metaphor: do you
+
+- The compiler is our _friend_ and true friends do not
+always bring us good news! 
+
+- Think about it using this metaphor: do you
 prefer a shallow friend, such as Python, that says yes to (almost)
 everything we say (at compile time), but is not there for us when we
 really need it (at run time), or a _true_ friend, such as Idris, that
 tells us that things are not all right all the time, but is there for
 us when we need it?
 - Another way to put it is that "With great power comes great
-rsponsibility!", as the philosopher Ben Parker used to say... Strong
+responsibility!", as the philosopher Ben Parker used to say... Strong
 typing, and in particular this form of strong typing, that relies on
 _automated theorem proving_ requires some effort from our part in
 order to precisely tell the compiler how things should be.
