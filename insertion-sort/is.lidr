@@ -17,7 +17,7 @@ of the section I list your activities for this lab.
 ## Type-define-refine {.allowframebreaks}
 
 - Type
-We will use the `Vect` datatype avaiable in Idris' prelude.
+We will use the `Vect` datatype available in Idris' prelude.
 ```idris
 
 > import Data.Vect
@@ -52,7 +52,7 @@ insSort (x :: xs) = ?insSort_rhs_2
 insSort (x :: xs) = ?insSort_rhs_2
 ```
 - And why is that? Because there is no _silver bullet_ and you need to understand
-the algorithm! The informal specification is quite clear: we need to isert `x` into
+the algorithm! The informal specification is quite clear: we need to insert `x` into
 a sorted (tail) list.
 ```idris
 insSort (x :: xs) = let l = insSort xs in ?insSort_rhs_2
@@ -119,7 +119,7 @@ and defines a number of operations, including `<`.
 Type-classes form an important concept in strongly-typed functional programming but
 we will not explore it any further in this short-course.
 
-- Hving said that, we need to constraint `insert` such that `elem` is an _ordered_ type.
+- Having said that, we need to constraint `insert` such that `elem` is an _ordered_ type.
 ```idris
 
 > insert : Ord elem => (x : elem) -> (l : Vect len elem) -> Vect (S len) elem
@@ -136,5 +136,5 @@ we will not explore it any further in this short-course.
 
 - So, finally, here is what you should do:
 1. Perform all the steps described above until you reach the code above.
-1. Replace the meta-variable with the apropriate `if then else` code or search
+1. Replace the meta-variable with the appropriate `if then else` code or search
 for Ctrl+Alt+M (to generate a `case`-based code) command on the web and try i.t

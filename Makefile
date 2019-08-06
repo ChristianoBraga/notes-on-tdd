@@ -27,6 +27,16 @@ check:
 	@echo ==============================================
 	@echo Checking for tnft.lidr should give an error...
 	@echo ==============================================
+	- idris --check the-need-for-types/delta-fix.lidr
+	@echo ==============================================
+	@echo Checking for delta-fix.lidr should give an error...
+	@echo ==============================================
+	- idris --check the-need-for-types/delta-fix2.lidr
+	- idris --check the-need-for-types/bhask-fun.lidr
+	@echo ==============================================
+	@echo Checking for bhask-fun.lidr should give an error...
+	@echo ==============================================
+	- idris --check the-need-for-types/bhask-fun-fix.lidr
 	- idris --check type-define-refine/tdr.lidr
 	- idris --check the-need-for-dependent-types/tnfdt.lidr
 	- idris --check insertion-sort/is.lidr

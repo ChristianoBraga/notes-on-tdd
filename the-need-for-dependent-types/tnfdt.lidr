@@ -9,8 +9,8 @@ The Ariane 5 had cost nearly \$8 billion to develop, and was carrying a \$500 mi
 [11 of the most costly software errors in
 history](https://raygun.com/blog/costly-software-errors-history/)
 
-- In this chapter we look at a simpliflied version of the `Vector`
-datatype, avaiable in Idris' library, to try and understand how
+- In this chapter we look at a simplified version of the `Vector`
+datatype, available in Idris' library, to try and understand how
 _dependent typing_ can be useful to have type-safe array handling that
 could help prevent catastrophes such as the Ariane 5 explosion.
 

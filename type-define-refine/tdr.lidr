@@ -9,18 +9,18 @@ outline of a definition or breaking it down into smaller components.
 1. Refine—Improve an existing definition either by filling in a hole
 or making its type more precise.
 
-Following the TDD book, we use the Atom editor to illustrate the process.
+Following the TDD book [Brady17](#Brady17), we use the Atom editor to illustrate the process.
 (Idris defines an IDE API such that editors like Atom, Emacs or Vi can interact
 with the REPL.)
 
 ## The `allLenghts` function {.allowframebreaks}
 
 Let us write a function that given a list of strings computes a list of integers
-denoting the lenght of each string in the given list.
+denoting the length of each string in the given list.
 
 - Type
 
-Which should be the type for `allLengths`? Our "problem statement" has alredy
+Which should be the type for `allLengths`? Our "problem statement" has already
 specified it so we just have to write it down:
 ```idris
 allLenghts : List String -> List Nat
@@ -71,12 +71,12 @@ allLenghts (x :: xs) = ?allLenghts_rhs_2
 ```
 
 Two equations were produced because lists in Idris are defined either as the
-emoty list, denoted by `[]`, or a non-empty list denoted by the _pattern_
-`x :: xs`, where `x` is the first element of the given list, whcih is
+empty list, denoted by `[]`, or a non-empty list denoted by the _pattern_
+`x :: CS`, where `x` is the first element of the given list, which is
 concatenated to the rest of list in `xs` by the operator `::`.
 
 Nice, and now we have two holes to think about, when the given list is empty
-and otherwise. Idris allows us to check the type of each hole using the comand
+and otherwise. Idris allows us to check the type of each hole using the command
 Ctrl+Alt+T when the cursor is on top of each variable.
 
 ```idris

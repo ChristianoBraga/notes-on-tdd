@@ -58,7 +58,7 @@ txtSQL = "SELECT * FROM Users WHERE UserId = "
 * Moreover, what if we could define special _notation_ to create
   instances of such types? 
 
-* Prtocols are one example but note that _business processes_ may be treated the same way.
+* Protocols are one example but note that _business processes_ may be treated the same way.
 
 ## Service-oriented web development model 
 
@@ -131,7 +131,13 @@ that will only handle a request on properly established sessions.
   approaches to Web development. 
   
 * More specifically, to develop Web programming support in Idris.
-	 
+
+## This short course
+
+* Objective is to introduce the necessary basic components of
+  functional programming and dependent types enough to create such
+  applications.
+
 ## Summing up
 
 * We have chosen an important technical problem in web development
@@ -139,11 +145,13 @@ that will only handle a request on properly established sessions.
   illustrate DSL with functional programming usefulness.
   
 * The issues raised here may be moved to a higher level of abstraction
-  to represent buiness processes and their refinement into code.
+  to represent business processes and their refinement into code.
   
 * There is off the shelf technology to support this approach.
 
 ## Suggested reading
+
+<a name="Brady17"> Edwin Brady</a>. 2017. Type-driven development. Manning
 
 <a name="Fowler&Brady13"> Simon Fowler and Edwin Brady</a>. 2013. Dependent Types for Safe and
 Secure Web Programming. In Proceedings of the 25th symposium on

@@ -183,6 +183,9 @@ and run `delta 1 2 3`, for instance, to see the following result.
 *delta-fix2> delta 1 2 3
 -8 : Int
 ```
+
+## The road so far {.allowframebreaks}
+
 - Your session should look like this at this point:
 ```idris
 Mon Aug 05@14:24:16:the-need-for-types$ idris --nobanner tnft.lidr
