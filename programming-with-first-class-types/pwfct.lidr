@@ -88,10 +88,14 @@ given as first argument_!
 
 ```idris
 
-> printfFmt : (fmt : Format) -> (acc : String) -> PrintfType fmt
-> printfFmt (Number fmt) acc = \i => printfFmt fmt (acc ++ show i)
-> printfFmt (Str fmt) acc = \str => printfFmt fmt (acc ++ str)
-> printfFmt (Lit lit fmt) acc = printfFmt fmt (acc ++ lit)
+> printfFmt : (fmt : Format) -> 
+>             (acc : String) -> PrintfType fmt
+> printfFmt (Number fmt) acc = 
+>           \i => printfFmt fmt (acc ++ show i)
+> printfFmt (Str fmt) acc = 
+>           \str => printfFmt fmt (acc ++ str)
+> printfFmt (Lit lit fmt) acc = 
+>           printfFmt fmt (acc ++ lit)
 > printfFmt End acc = acc
 
 ```
@@ -105,22 +109,26 @@ given as first argument_!
 > toFormat ('%' :: 'd' :: chars) = Number (toFormat chars)
 > toFormat ('%' :: 's' :: chars) = Str (toFormat chars)
 > toFormat ('%' :: chars) = Lit "%" (toFormat chars)
-> toFormat (c :: chars) = case toFormat chars of
->                             Lit lit chars' => Lit (strCons c lit) chars'
->                             fmt => Lit (strCons c "") fmt
-> printf : (fmt : String) -> PrintfType (toFormat (unpack fmt))
+> toFormat (c :: chars) = 
+>   case toFormat chars of
+>      Lit lit chars' => Lit (strCons c lit) chars'
+>      fmt => Lit (strCons c "") fmt
+> printf : (fmt : String) -> 
+>          PrintfType (toFormat (unpack fmt))
 > printf fmt = printfFmt _ ""
 
 ```
 
 - Try this out at the REPL:
 ```idris
-*pwfct> :let msg = "The author of %s, published in %d, is %s."
+*pwfct> :let msg = 
+        "The author of %s, published in %d, is %s."
 *pwfct> :let b = "A Brief History of Time"
 *pwfct> :let a = "Stephen Hawking"
 *pwfct> :let y = the Int 1988
 *pwfct> printf msg b y a
-"The author of A Brief History of Time, published in 1988, is Stephen Hawking." : String
+"The author of A Brief History of Time, 
+ published in 1988, is Stephen Hawking." : String
 ```
 
 - At this point you should be able `=(` to understand what is going

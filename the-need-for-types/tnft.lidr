@@ -1,13 +1,15 @@
 # The need for types {.allowframebreaks}
 
-This section motivates the use of strong typing with a very very
-simple example: Bhaskara's theorem. In a tutorial way, we
-illustrate how types are necessary and, more specifically, how Idris'
-strong-typing presents itslef as a powerful development tool.
+- This section motivates the use of strong typing with a very very
+simple example: Bhaskara's theorem. 
+
+- In a tutorial way, we illustrate how types are necessary and, more
+specifically, how Idris' strong-typing presents itself as a powerful
+development tool.
 
 ## Bhaskara's theorem 
 
-From school: Bhaskara's theorem\footnote{For solving $2^{nd}$ degree
+- From school: Bhaskara's theorem\footnote{For solving $2^{nd}$ degree
 polynomials. But this could might as well be an Excel formula, for
 instance! I mention Excel because that Microsoft is devoting serious
 efforts to develop a type system for Excel.}
@@ -17,35 +19,33 @@ ax^2 + bx + c  = 0 & \Rightarrow & x = \frac{-b \stackrel{+}{-} \sqrt{\delta}}{2
 && \text{where } \delta = b^2 - 4acb
 \end{eqnarray*}
 
-### As functions
+## As functions
 
-\begin{multline*}
-\mathtt{bhask}(a,b,c) = \\
-\left( -b + \sqrt{\mathtt{delta}(a,b,c)} / 2a \mathbf{,}
--b - \sqrt{\mathtt{delta}(a,b,c)} / 2a\right) 
-\end{multline*}
+\begin{align*}
+\mathtt{bhask}(a,b,c) & = \\ \nonumber
+& ( -b + \sqrt{\mathtt{delta}(a,b,c)} / 2a \mathbf{,} \\
+& -b - \sqrt{\mathtt{delta}(a,b,c)} / 2a ) \\
+\mathtt{delta}(a,b,c) & = b^2 - 4acb
+\end{align*}
 
-\begin{eqnarray*}
-\mathtt{delta}(a,b,c) = & b^2 - 4acb
-\end{eqnarray*}
+## First attempt: no types i
 
-## First attempt: no types. {.allowframebreaks}
-
-- In Python:
+- In Python:  
 ```python
 from math import sqrt
-
 def delta(a,b,c):
-    return  (b * b) - (4 * a * c)
-
+  return  (b * b) - (4 * a * c)
 def bhask(a,b,c):
-    d = delta(a,b,c)
-    sr = sqrt(d)
-    r1 = (-b + sr) / 2 * a
-    r2 = (-b - sr) / 2 * a
-    return (r1, r2)
+  d = delta(a,b,c)
+  sr = sqrt(d)
+  r1 = (-b + sr) / 2 * a
+  r2 = (-b - sr) / 2 * a
+  return (r1, r2)
 ```
-- When we run `bhask(1,2,3)` the following is spit out:
+
+## First attempt: no types ii
+
+- When we run `bhask(1,2,3)` the following is spit out:  
 ```python
 Traceback (most recent call last):
   File "bhask.py", line 16, in <module>
@@ -59,24 +59,22 @@ implementation and forgot that `delta(a,b,c)` may return a _negative_ value!
 
 ## Second attempt: still no types. {.allowframebreaks}
 
-- Now, assuming we are instered only on Real results, how should
-  `bhask` deal with the possilibity of a negative `delta`?
-- One possibilty is to raise an _exception_:
+- Now, assuming we are interested only on Real results, how should
+  `bhask` deal with the possibility of a negative `delta`?
+- One possibility is to raise an _exception_:
 ```python
 from math import sqrt
-
 def delta(a,b,c):
-    return  (b * b) - (4 * a * c)
-
+  return  (b * b) - (4 * a * c)
 def bhask(a,b,c):
-    d = delta(a,b,c)
-    if d >= 0:
-        sr = sqrt(d)
-        r1 = (-b + sr) / 2 * a
-        r2 = (-b - sr) / 2 * a
-        return (r1, r2)
-    else:
-        raise Exception("No Real results.")
+  d = delta(a,b,c)
+  if d >= 0:
+		sr = sqrt(d)
+		r1 = (-b + sr) / 2 * a
+		r2 = (-b - sr) / 2 * a
+		return (r1, r2)
+  else:
+		raise Exception("No Real results.")
 ``` 
 - This implementation gives us a more _precise_ answer:
 ```python
@@ -98,9 +96,9 @@ Exception: No Real results.
 - Let us play with `delta` first.
 
 - Strongly-typed languages, such as Idris, force us to think about types
-  right away as we need to define `delta`'s signature. If we make the
-  same mistake we did in the first attempt and forget that `delta` may
-  become negative, we may write,
+right away as we need to define `delta`'s signature. If we make the
+same mistake we did in the first attempt and forget that `delta` may
+become negative, we may write,
 ```idris 
 
 > delta : (a :  Nat) -> (b : Nat) -> (c : Nat) -> Nat 
@@ -116,12 +114,12 @@ intro.lidr:100:26:
     |                          ^
 When checking right hand side of delta with expected type
         Nat
-
 When checking argument smaller to function Prelude.Nat.-:
      Can't find a value of type
      LTE (mult (plus a (plus a (plus a (plus a 0)))) c)
      (mult b b)
 ```
+
 - This is cryptic, in a first-glance, but tells us precisely **what** is
   wrong **and** at **compile** time.  The problem is **with
   subtraction**: the type checker was not able to solve the
@@ -186,9 +184,10 @@ and run `delta 1 2 3`, for instance, to see the following result.
 
 ## The road so far {.allowframebreaks}
 
-- Your session should look like this at this point:
+Your session should look like this at this point:
 ```idris
-Mon Aug 05@14:24:16:the-need-for-types$ idris --nobanner tnft.lidr
+Mon Aug 05@14:24:16:the-need-for-types$ 
+idris --nobanner tnft.lidr
 Type checking ./tnft.lidr
 tnft.lidr:107:25:
     |
@@ -249,7 +248,8 @@ order to precisely tell the compiler how things should be.
 solution (when $\delta < 0$), one (when $\delta = 0$), or two (when
 $\delta > 0$). Since "The Winter is Coming" we should be prepared for two roots:
 ```idris
-bhask : (a :  Nat) -> (b : Nat) -> (c : Nat) -> (Double, Double)
+bhask : (a :  Nat) -> (b : Nat) -> (c : Nat) 
+                                -> (Double, Double)
 bhask a b c = ((-b + (sqrt (delta a b c))) / (2 * a), 
                (-b - (sqrt (delta a b c))) / (2 * a))
 ```
@@ -263,13 +263,15 @@ sqrt : Double -> Double
 Type checking ./bhask-fun.lidr
 bhask-fun.lidr:2:19:
   |
-2 | > bhask a b c = ((-b + (sqrt (delta a b c))) / (2 * a), 
-                     (-b - (sqrt (delta a b c))) / (2 * a))
-  |                   ^
+2 | > bhask a b c = 
+            ((-b + (sqrt (delta a b c))) / (2 * a), 
+             (-b - (sqrt (delta a b c))) / (2 * a))
+  |           ^
 When checking right hand side of bhask with expected type
         (Double, Double)
 
-When checking an application of function Prelude.Interfaces.negate:
+When checking an application of function 
+    Prelude.Interfaces.negate:
         Type mismatch between
                 Nat (Type of b)
         and
@@ -287,16 +289,20 @@ natural number! Again, casting is necessary.
 ```idris
 delta : (a :  Nat) -> (b : Nat) -> (c : Nat) -> Int
 delta a b c =  (cast (b * b)) - (cast (4 * a * c))
-bhask : (a :  Nat) -> (b : Nat) -> (c : Nat) -> (Double, Double)
+bhask : (a :  Nat) -> (b : Nat) -> (c : Nat) 
+                                -> (Double, Double)
 bhask a b c = 
-  (negate (cast b) + (sqrt (cast (delta a b c))) / cast (2 * a), 
-   negate (cast b) - (sqrt (cast (delta a b c))) / cast (2 * a))
+  (negate (cast b) + 
+    (sqrt (cast (delta a b c))) / cast (2 * a), 
+   negate (cast b) - 
+    (sqrt (cast (delta a b c))) / cast (2 * a))
 ```
 - We can now play with `bhask`, after executing `:l bhask-fun-fix.lidr` 
 ```idris
 Type checking ./bhask-fun-fix.lidr
 *bhask-fun-fix> bhask 1 10 4
-(-5.41742430504416, -14.582575694955839) : (Double, Double)
+(-5.41742430504416, -14.582575694955839) : 
+                              (Double, Double)
 *bhask-fun-fix> bhask 1 2 3
 (NaN, NaN) : (Double, Double)
 ```

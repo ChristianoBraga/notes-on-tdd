@@ -150,7 +150,8 @@ _number_, and `a` (or `b`, for that matter) is a _type_!
 - Now, take a look at this:
 ```idris
 *tnfdt> Vect.zip [1,2,3] ["a", "b"]
-(input):1:19-21:When checking argument xs to constructor Vect.:::
+(input):1:19-21:When checking argument xs to 
+  constructor Vect.:::
         Type mismatch between
                 Vect 0 a (Type of [])
         and

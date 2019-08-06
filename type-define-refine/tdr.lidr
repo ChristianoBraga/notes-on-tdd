@@ -72,7 +72,7 @@ allLenghts (x :: xs) = ?allLenghts_rhs_2
 
 Two equations were produced because lists in Idris are defined either as the
 empty list, denoted by `[]`, or a non-empty list denoted by the _pattern_
-`x :: CS`, where `x` is the first element of the given list, which is
+`x :: as`, where `x` is the first element of the given list, which is
 concatenated to the rest of list in `xs` by the operator `::`.
 
 Nice, and now we have two holes to think about, when the given list is empty
@@ -134,7 +134,8 @@ of the first. Try this on the REPL:
 Splits a string into a list of newline separated strings.
 
 = Prelude.Strings.words : String -> List String
-Splits a string into a list of whitespace separated strings.
+Splits a string into a list of whitespace 
+                                       separated strings.
 ...
 ```
 
@@ -176,19 +177,22 @@ The first lab is to complete the code below using what we have discussed so far.
 
 > wordCount : String -> Nat
 > -- Type-define-refine this function!
-> -- Start by running `Ctrl+Alt+A` to add a definition, than `Ctrl+Alt+C`
-> -- to split cases and finally `Ctrl+Alt+S` to search for proofs(!) that represent
-> -- the code you need! (Intrigued? Ask the instructor for an advanced course on
-> -- this topic than = ) 
+> -- Start by running `Ctrl+Alt+A` to add a definition, 
+> -- than `Ctrl+Alt+C` to split cases and finally 
+> -- `Ctrl+Alt+S` to search for proofs(!) that represent
+> -- the code you need! (Intrigued? Ask the instructor 
+> -- for an advanced course on this topic than = ) 
 >
 > average : (str : String) -> Double
-> average str = let numWords = wordCount str
->                   totalLength = sum (allLengths (words str))
->               in ?w
+> average str = 
+>         let numWords = wordCount str
+>             totalLength = 
+>                   sum (allLengths (words str))
+>         in ?w
 > -- Which is the type of `?w1`?
 > -- Proof search won't help you here, unfortunately...
-> -- Run `:doc sum` at the REPL. Just read the documentation at the moment,
-> -- not the type of `sum`.
+> -- Run `:doc sum` at the REPL. Just read the 
+> -- documentation at the moment, not the type of `sum`.
 >
 > showAverage : String -> String
 > showAverage str =
@@ -204,10 +208,13 @@ The first lab is to complete the code below using what we have discussed so far.
 
 - Using the example string from above, you should get the following spit at you:
 ```idris
-Sat Aug 03@18:05:17:type-define-refine$ idris --nobanner tdr.lidr
+Sat Aug 03@18:05:17:type-define-refine$ 
+idris --nobanner tdr.lidr
 Type checking ./tdr.lidr
 *tdr> :exec main
-Enter a string: Here we are, born to be kings, we are princess of the universe!
+Enter a string: 
+Here we are, born to be kings, 
+  we are princess of the universe!
 The average word length is: 3.923076923076923
 ```
 
