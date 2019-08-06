@@ -111,8 +111,9 @@ that will only handle a request on properly established sessions.
 
 * Essentially, there are two approaches for DSL-based development:  
 	1. Transformational approach:  
-	  DSL program _**=parsing=>**_ Protocol data type instance  
-	  _**=transformation=>**_ Web (micro)service framework.
+	  DSL program $\xrightarrow{\text{parsing}}$ Protocol
+	  data type instance  
+	  $\xrightarrow{\text{transformation}}$ Web (micro)service framework.
 
 	2. Embedded DSL approach:  
 	  The programming languages has support the definition of notation and
