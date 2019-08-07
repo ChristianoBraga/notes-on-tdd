@@ -4,7 +4,8 @@ FILES = intro/intro.md \
 	the-need-for-dependent-types/tnfdt.lidr \
 	insertion-sort/is.lidr \
 	programming-with-first-class-types/pwfct.lidr \
-	streams/streams.lidr
+	streams/streams.lidr \
+	domain-specific-commands/dsc.lidr
 
 all: check slides paper
 
@@ -43,5 +44,6 @@ check:
 	- idris --check insertion-sort/is.lidr
 	- idris --check programming-with-first-class-types/pwfct.lidr
 	- idris --check streams/streams.lidr
+	- idris --check domain-specific-commands/dsc.lidr
 
 

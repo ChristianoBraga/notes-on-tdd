@@ -143,6 +143,7 @@ streams?
   datatype. The `Lazy` datatype is similar to the `Inf` we have seen
   before, it "encapsulates" infinite data and only computes it when
   necessary. 
+
 ```idris
 
 > data Fuel =
@@ -151,7 +152,7 @@ streams?
 > tank : Nat -> Fuel
 > tank Z = Dry
 > tank (S k) = More (tank k)
-
+>
 > partial
 > runPartial : InfIO -> IO ()
 > runPartial (Do action f) = 
@@ -165,10 +166,19 @@ streams?
 > run2 Dry p = putStrLn "Out of fuel"
 >
 > partial
-> forever : Fuel
-> forever = More forever
-> 
-> partial
 > main : IO ()
 > main = run2 (tank 10) (loopPrint "vroom")
+
+```
+
+## `Inf` vs. `Lazy` {.allowframebreaks}
+
+- If the argument has type Lazy ty, for some type ty, it’s considered
+  smaller than the constructor expression.
+
+- If the argument has type Inf ty, for some type ty, it’s not
+  considered smaller than the constructor expression, because it may
+  continue expanding indefi- nitely. Instead, Idris will check that
+  the overall expression is productive
+
 
