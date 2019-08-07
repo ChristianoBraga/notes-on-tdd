@@ -5,7 +5,8 @@ FILES = intro/intro.md \
 	insertion-sort/is.lidr \
 	programming-with-first-class-types/pwfct.lidr \
 	streams/streams.lidr \
-	domain-specific-commands/dsc.lidr
+	domain-specific-commands/dsc.lidr \
+	domain-specific-commands/ArithCmd.lidr
 
 all: check slides paper
 
