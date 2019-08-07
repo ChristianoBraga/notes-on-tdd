@@ -3,7 +3,7 @@
 ## Contact information
 
 **Christiano Braga**  
-_Associated Professor_
+_Associate Professor_
 
 Instituto de Computação  
 Universidade Federal Fluminense  

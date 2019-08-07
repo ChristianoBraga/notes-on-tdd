@@ -3,7 +3,8 @@ FILES = intro/intro.md \
 	type-define-refine/tdr.lidr \
 	the-need-for-dependent-types/tnfdt.lidr \
 	insertion-sort/is.lidr \
-	programming-with-first-class-types/pwfct.lidr 
+	programming-with-first-class-types/pwfct.lidr \
+	streams/streams.lidr
 
 all: check slides paper
 
@@ -41,6 +42,6 @@ check:
 	- idris --check the-need-for-dependent-types/tnfdt.lidr
 	- idris --check insertion-sort/is.lidr
 	- idris --check programming-with-first-class-types/pwfct.lidr
-
+	- idris --check streams/streams.lidr
 
 

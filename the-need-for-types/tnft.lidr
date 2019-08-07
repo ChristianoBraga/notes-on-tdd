@@ -351,21 +351,20 @@ a function that expects a number and then behaves as `delta`.
 - At the end of the day, `delta 1 2 3` is just _syntax sugar_ for
   `((delta 1) 2) 3`.  
 
-- Total functions. From Idris' FAQ:
-Idris can’t decide in general whether a program is terminating due to
-the undecidability of the Halting Problem. It is possible, however, to
-identify some programs which are definitely terminating. Idris does
-this using “size change termination” which looks for recursive paths
-from a function back to itself. On such a path, there must be at least
-one argument which converges to a base case.
-- Mutually recursive functions are supported. 
-However, all functions on the path must be fully applied. In
-particular, higher order applications are not supported
-- Idris identifies arguments which converge to a base case by
-looking for recursive calls to syntactically smaller arguments
-of inputs. e.g. $k$ is syntactically smaller than $S (S k)$ because
-$k$ is a subterm of $S (S k)$, but $(k, k)$ is not syntactically
-smaller than $(S k, S k)$.
+- Total functions are such that, for all well-typed inputs, does one
+of the following: 
+  - Terminates with a well-typed result 
+  - Produces a non-empty finite prefix of a well-typed infinite result in finite time
+We can describe total functions as either terminating or
+productive. 
+  - The halting problem is the difficulty of determining 
+whether a specific program terminates or not, and, thanks to Alan
+Turing, we know that it’s impossible in general to write a program
+that solves the halting problem. 
+  - In other words, Idris can’t determine
+whether one of these conditions holds for all total
+functions. Instead, it makes a conservative approximation by
+analyzing a function’s syntax.
 
 - Type casting. We have used `cast` many times in order to _inject_
   our values from one type into another.
