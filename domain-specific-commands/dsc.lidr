@@ -3,7 +3,7 @@
 In this lab we will restrict interactive program's to perform only
 specific actions as opposed to the stream example.
 
-## `Command`type {.allowframebreaks}
+## `Command` type {.allowframebreaks}
 
 - Type `Command` defines an interactive interface that `ConsoleIO`, a
 type that describes interactive programs that support only reading
