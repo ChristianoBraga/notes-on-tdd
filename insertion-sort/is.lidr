@@ -18,6 +18,7 @@ of the section I list your activities for this lab.
 
 - Type
 We will use the `Vect` datatype avaiable in Idris' prelude.
+
 ```idris
 
 > import Data.Vect
@@ -55,7 +56,8 @@ insSort (x :: xs) = ?insSort_rhs_2
 the algorithm! The informal specification is quite clear: we need to isert `x` into
 a sorted (tail) list.
 ```idris
-insSort (x :: xs) = let l = insSort xs in ?insSort_rhs_2
+insSort (x :: xs) =
+	let l = insSort xs in ?insSort_rhs_2
 ```
 
 - We can now ask the system to help us with `?insSort_rhs_2` in this context by
@@ -124,6 +126,7 @@ Type-classes form an important concept in strongly-typed functional programming 
 we will not explore it any further in this short-course.
 
 - Having said that, we need to constraint `insert` such that `elem` is an _ordered_ type.
+
 ```idris
 
 > insert : Ord elem => (x : elem) -> 

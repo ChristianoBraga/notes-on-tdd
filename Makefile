@@ -24,7 +24,14 @@ slides:
 	-V institute:"Universidade Federal Fluminense" \
         -o notes-on-tdd-slides.pdf
 
-check: 
+test:
+	#Checking for required tools in macOS Mojave and Linux Ububtu.
+	@test -x /usr/local/bin/idris || test -x ${HOME}/.cabal/bin/idris
+	@test -x /usr/local/texlive/*/bin/x86_64-*/pdflatex
+	#OK
+
+check: test
+	#Checking for code files.
 	- idris --check the-need-for-types/tnft.lidr
 	@echo ==============================================
 	@echo Checking for tnft.lidr should give an error...

@@ -20,9 +20,10 @@ interactive programs, eliminating any unnecessary actions.
 
 > data ConsoleIO : Type -> Type where
 >     Quit : a -> ConsoleIO a
->     Do : Command a -> (a -> Inf (ConsoleIO b)) -> ConsoleIO b
-
-> (>>=) : Command a -> (a -> Inf (ConsoleIO b)) -> ConsoleIO b
+>     Do : Command a -> (a -> Inf (ConsoleIO b)) ->
+>      	   ConsoleIO b
+> (>>=) : Command a -> (a -> Inf (ConsoleIO b)) ->
+> 	  ConsoleIO b
 > (>>=) = Do
 
 ```

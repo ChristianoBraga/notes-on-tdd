@@ -97,6 +97,7 @@ of a vector, that is, index it beyond its range!
 
 - The `zip` function simple creates pairs of elements out of two
 instances of `Vect` _with the same size_. Here is what it look like:
+
 ```idris
 
 > zip : Vect n a -> Vect n b -> Vect n (a, b)
@@ -125,7 +126,8 @@ elements are represented by a (sub)vector `xs`.
 - For instance, if we could write
 ```idris
 *tnfdt> Vect.zip [1,2,3] ["a", "b", "c"]
-[(1, "a"), (2, "b"), (3, "c")] : Vect 3 (Integer, String)
+[(1, "a"), (2, "b"), (3, "c")] :
+     Vect 3 (Integer, String)
 ```
 and get the expected vector of pairs produced by `zip`. (I used
 `Vect.zip` only because there are other `zip` functions coming from

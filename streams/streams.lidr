@@ -9,6 +9,7 @@
 the Stream and generate the remainder recursively. You can think of an
 interactive program as being a program that produces a potentially
 infinite sequence of interactive actions.
+
 ```idris
 
 > %default total
@@ -72,6 +73,7 @@ Force : (computation : Inf ty) -> ty
 ```
 
 - Function `countFrom` is an example on how to use `Inf`.
+
 ```idris
 
 > countFrom : Integer -> InfList Integer
@@ -104,7 +106,8 @@ iterate : (f : elem -> elem) -> (x : elem) -> Stream elem
  (iterate (+1) 0)
 *streams/streams> (iterate (+1) 0)
 0 ::
-Delay (iterate (\ARG => prim__addBigInt ARG 1) 1) : Stream Integer
+Delay (iterate (\ARG => prim__addBigInt ARG 1) 1) :
+      	       	     			Stream Integer
 ```
 and try to grasp which type is this.
 

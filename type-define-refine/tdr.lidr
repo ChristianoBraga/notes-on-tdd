@@ -1,6 +1,6 @@
 # Type-define-refine approach
 
-The approach is threefold:
+- The approach is threefold:
 
 1. Type—Either write a type to begin the process, or inspect the type
 of a hole to decide how to continue the process.
@@ -15,18 +15,17 @@ with the REPL.)
 
 ## The `allLenghts` function {.allowframebreaks}
 
-Let us write a function that given a list of strings computes a list of integers
+- Let us write a function that given a list of strings computes a list of integers
 denoting the length of each string in the given list.
 
-- Type
-
+- Type.
 Which should be the type for `allLengths`? Our "problem statement" has already
 specified it so we just have to write it down:
 ```idris
 allLenghts : List String -> List Nat
 ```
 
-After loading the file `tdr.lidr` we get the following.
+- After loading the file `tdr.lidr` we get the following.
 ```idris
 Type checking ./tdr.lidr
 Holes: Main.allLenghts
@@ -35,12 +34,11 @@ allLenghts : List String -> List Nat
 Holes: Main.allLenghts
 ```
 
-There is no surprise with the type but there is `Hole` in our program. Obviously
+- There is no surprise with the type but there is `Hole` in our program. Obviously
 is because we did not declare the equations that define `allLenghts`. This may
 also occur when Idris fails to type-check a given program.
 
 - Define
-
 Idris may help us think about which cases our function must handle. In the Atom
 editor, we press Ctrl+Alt+A, producing the following definition:
 ```idris
@@ -48,34 +46,33 @@ allLenghts : List String -> List Nat
 allLenghts xs = ?allLenghts_rhs
 ```
 
-Of course this is not enough. Here is what Idris says when we load it like this:
+- Of course this is not enough. Here is what Idris says when we load it like this:
 ```idris
 Type checking ./tdr.lidr
 Holes: Main.allLenghts_rhs
 ```
 
-Let us think about it: what just happened here? Nothing more than create an
+- Let us think about it: what just happened here? Nothing more than create an
 equation saying that when the `xs` list is given, "something"
 `?allLenghts_rhs`-ish will happen. Simple but useful when we repeat this
 process. It is even more useful as a learning tool. Let's continue!
 
-Idris won't leave us with our hands hanging here. It can assist us on thinking
+- Idris won't leave us with our hands hanging here. It can assist us on thinking
 about what `?allLenghts_rhs` should look like if we inspect `xs`.
 
-If we press Ctrl+Alt+C on `xs` the editor spits out the following code:
+- If we press Ctrl+Alt+C on `xs` the editor spits out the following code:
 ```idris
 allLenghts : List String -> List Nat
 allLenghts [] = ?allLenghts_rhs_1
 allLenghts (x :: xs) = ?allLenghts_rhs_2
-
 ```
 
-Two equations were produced because lists in Idris are defined either as the
+- Two equations were produced because lists in Idris are defined either as the
 empty list, denoted by `[]`, or a non-empty list denoted by the _pattern_
 `x :: as`, where `x` is the first element of the given list, which is
 concatenated to the rest of list in `xs` by the operator `::`.
 
-Nice, and now we have two holes to think about, when the given list is empty
+- Nice, and now we have two holes to think about, when the given list is empty
 and otherwise. Idris allows us to check the type of each hole using the command
 Ctrl+Alt+T when the cursor is on top of each variable.
 
@@ -89,12 +86,11 @@ xs : List String
 allLenghts_rhs_2 : List Nat
 ```
 
-- Refine
-
+- Refine.
 The refinement of `allLenghts_rhs_1` is trivial: Ctrl+Alt+S (_proof search_)
 on it gives us `[]`.
 
-For `allLenghts_rhs_2` we need to know however that there exists a `length`
+- For `allLenghts_rhs_2` we need to know however that there exists a `length`
 operation on strings. We should than apply it `x` and "magically" build the
 rest of the resulting string. Our code now looks like this:
 ```idris
@@ -103,7 +99,7 @@ allLenghts [] = []
 allLenghts (x :: xs) = (length x) :: ?magic
 ```
 
-Atom and Idris may help us identify what
+- Atom and Idris may help us identify what
 [kind of magic](https://open.spotify.com/track/5RYLa5P4qweEAKq5U1gdcK?si=TV5gMDD6R2mDlFGoVjPU4Q)
 is this. We just have to Ctrl+Alt+T it to get:
 ```idris
@@ -112,9 +108,11 @@ xs : List String
 --------------------------------------
 magic : List Nat
 ```
-So now we need _faith on recursion_ (as Roberto Ierusalimschy, a co-author of
+
+- So now we need _faith on recursion_ (as Roberto Ierusalimschy, a co-author of
 Lua, says) and let the rest of the problem "solve itself".
 Finally, we reach the following implementation:
+
 ```idris
 
 > module Main
@@ -125,25 +123,26 @@ Finally, we reach the following implementation:
 
 ```
 
-Awesome! For our final magic trick, I would like to know if Idris has a function
+- Awesome! For our final magic trick, I would like to know if Idris has a function
 that given a string produces a list of strings whose elements are the substrings
 of the first. Try this on the REPL:
+
 ```idris
 *type-define-refine/tdr> :search String -> List String
 = Prelude.Strings.lines : String -> List String
 Splits a string into a list of newline separated strings.
-
 = Prelude.Strings.words : String -> List String
-Splits a string into a list of whitespace 
-                                       separated strings.
+Splits a string into a list of whitespace separated
+strings.
 ...
 ```
 
-It turns out that `words` is exactly what I was looking for!
+- It turns out that `words` is exactly what I was looking for!
 Run the following:
 ```idris
-*type-define-refine/tdr> :let l = "Here we are, born to be kings,
- we are princess of the universe!"
+*type-define-refine/tdr>
+:let l = "Here we are, born to be kings,
+       	        we are princess of the universe!"
 *type-define-refine/tdr> words l
 ["Here",
  "we",
@@ -159,7 +158,8 @@ Run the following:
  "the",
  "universe!"] : List String
 ```
-And Finally
+
+- And Finally
 ```idris
 *type-define-refine/tdr> :let w = words l
 *type-define-refine/tdr> allLenghts w
@@ -173,6 +173,7 @@ In the labs in this short-course you will have to complete or fix some Idris cod
 - First lab.
 
 The first lab is to complete the code below using what we have discussed so far.
+
 ```idris
 
 > wordCount : String -> Nat
