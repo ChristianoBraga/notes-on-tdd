@@ -5,6 +5,7 @@ FILES = intro/intro.md \
 	insertion-sort/is.lidr \
 	programming-with-first-class-types/pwfct.lidr \
 	streams/streams.lidr \
+	protocols/protocols.lidr \
 	domain-specific-commands/dsc.lidr 
 
 all: check slides paper
@@ -51,6 +52,7 @@ check: test
 	- idris --check insertion-sort/is.lidr
 	- idris --check programming-with-first-class-types/pwfct.lidr
 	- idris --check streams/streams.lidr
+	- idris --check protocols/protocols.lidr
 	- idris --check domain-specific-commands/dsc.lidr
 	- idris --check domain-specific-commands/ArithCmd.idr
 
