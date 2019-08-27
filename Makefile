@@ -8,21 +8,41 @@ FILES = intro/intro.md \
 	protocols/protocols.lidr \
 	domain-specific-commands/dsc.lidr 
 
+PANDOC-PAPER-CMD = pandoc -N --toc -f markdown -t latex -s
+
+PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
+		        -V theme:metropolis \
+			-V institute:"Universidade Federal Fluminense" 
+
+PANDOC-MARKDOWN-CMD = pandoc -f markdown -t markdown -s
+
 all: check slides paper
 
-paper:
-	pandoc -N --toc -f markdown -t latex \
+tcs: check tcs-slides tcs-paper
+
+tcs-paper:
+	${PANDOC-PAPER-CMD} \
+	header.md \
+	intro-tcs/intro-tcs.md ${FILES} \
+	-o tcs-notes-on-tdd.pdf
+
+tcs-slides:
+	${PANDOC-SLIDES-CMD} \
+	header-slides.md \
+	intro-tcs/intro-tcs.md ${FILES} \
+	-o tcs-notes-on-tdd-slides.pdf
+
+paper: 
+	${PANDOC-PAPER-CMD} \
 	header.md ${FILES} -s -o notes-on-tdd.pdf
 
 md:
-	pandoc -f markdown -t markdown -s \
+	${PANDOC-MARKDOWN-CMD} \
 	header-slides.md ${FILES} -o notes-on-tdd.md
 
-slides: 
-	pandoc header-slides.md ${FILES} \
-	-t beamer --slide-level=2 \
-        -V theme:metropolis \
-	-V institute:"Universidade Federal Fluminense" \
+slides:
+	${PANDOC-SLIDES-CMD} \
+	header-slides.md ${FILES} \
         -o notes-on-tdd-slides.pdf
 
 test:
@@ -53,6 +73,9 @@ check: test
 	- idris --check programming-with-first-class-types/pwfct.lidr
 	- idris --check streams/streams.lidr
 	- idris --check protocols/protocols.lidr
+	@echo ==============================================
+	@echo Checking for protocols.lidr should give an error...
+	@echo ==============================================
 	- idris --check domain-specific-commands/dsc.lidr
 	- idris --check domain-specific-commands/ArithCmd.idr
 
