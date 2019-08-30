@@ -6,7 +6,8 @@ FILES = intro/intro.md \
 	programming-with-first-class-types/pwfct.lidr \
 	streams/streams.lidr \
 	protocols/protocols.lidr \
-	domain-specific-commands/dsc.lidr 
+	protocols/simple-app.lidr
+#	domain-specific-commands/dsc.lidr 
 
 PANDOC-PAPER-CMD = pandoc -N --toc -f markdown -t latex -s
 
@@ -73,10 +74,8 @@ check: test
 	- idris --check programming-with-first-class-types/pwfct.lidr
 	- idris --check streams/streams.lidr
 	- idris --check protocols/protocols.lidr
-	@echo ==============================================
-	@echo Checking for protocols.lidr should give an error...
-	@echo ==============================================
-	- idris --check domain-specific-commands/dsc.lidr
-	- idris --check domain-specific-commands/ArithCmd.idr
+	- idris --check protocols/simple-app.lidr
+#	- idris --check domain-specific-commands/dsc.lidr
+#	- idris --check domain-specific-commands/ArithCmd.idr
 
 

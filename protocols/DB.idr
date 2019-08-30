@@ -1,7 +1,5 @@
 import Data.SortedMap
 
--- % default total
-
 namespace Database
 
     data ConnState = NotConn | Conn
@@ -19,7 +17,7 @@ namespace Database
                    | SELECT Int
                    | DELETE Int
     
-    data Input = OPEN
+    data Input = OPEN String
                | CLOSE 
                | QUERY QueryLang
 
@@ -70,10 +68,21 @@ namespace Database
                      otherwise => Nothing
 
     strToInput : String -> Maybe Input
-    strToInput s = case s of
-                        "open" => Just OPEN
-                        "close" => Just CLOSE
-                        otherwise => mkQuery(s)
+    strToInput s = 
+               if ((head' (words s)) == (Just "open"))
+               then 
+                 let db = tail' (words s)
+                 in 
+                     case db of
+                       Just d => 
+                         case d of 
+                           [s'] => Just (OPEN s')
+                           otherwise => Nothing
+                       otherwise => Nothing
+               else 
+                    if s == "close"
+                    then Just CLOSE
+                    else mkQuery(s)
 
     eval : QueryLang -> Database -> (Database, Report)
     eval (INSERT i s) db = ((insert i s db), [])
@@ -84,7 +93,7 @@ namespace Database
     eval (DELETE i) db = ((delete i db), [])
         
     data DBCmd : Type -> DBState -> DBState -> Type where
-      OPENDB : DBCmd () (s, NotConn, db, []) (s, Conn, db, [])
+      OPENDB : (d : String) -> DBCmd () (s, NotConn, db, []) (d, Conn, (fromList [(0,"0")]), [])
       CLOSEDB : DBCmd () (s, Conn, db, r) (s, NotConn, db, [])      
       QUERYDB : (q : QueryLang) -> 
                 DBCmd () (s, Conn, db, r) 
@@ -108,16 +117,18 @@ namespace Database
 
     runMachine : DBCmd ty inState outState -> IO ty
     runMachine {inState = (s, NotConn, db, [])} 
-               {outState = (s, Conn, db, [])} OPENDB = 
+               {outState = (s', Conn, (fromList [(0, "0")]), [])} (OPENDB s') = 
       do 
-        putStrLn ("DB " ++ s ++ " open")
-        showDB db
+        putStrLn ("DB " ++ s' ++ " open")
+        showDB (fromList [(0, "0")])
         
     runMachine {inState = (s, Conn, db, r)} 
                {outState = (s, NotConn, db, [])} CLOSEDB = putStrLn ("DB " ++ s ++ " closed")
     runMachine {inState = (s, Conn, db, r)} 
                {outState = (s, Conn, (fst (eval q db)), (snd (eval q db)))} (QUERYDB q) = 
-               do showDB   (fst (eval q db))
+               do putStrLn("DB contents") 
+                  showDB   (fst (eval q db))
+                  putStrLn("Query result")
                   putStrLn (unwords (snd (eval q db)))               
     runMachine (Pure x) = pure x
     runMachine (cmd >>= prog) = do x <- runMachine cmd
@@ -150,26 +161,13 @@ namespace Database
          do Just x <- GetInput | Nothing => do Display "Invalid input"
                                                dbLoop
             case x of
-                OPEN => 
-                  do OPENDB {s = n} {db = d}
+                OPEN x => 
+                  do OPENDB x {db = d}
                      dbLoop
                 otherwise => 
                   do Display "You should open the database first."
                      dbLoop
 
-{-    dbLoop {st = (n, NotConn, d, r)} = 
-         do Just x <- GetInput | Nothing => do Display "Invalid input"
-                                               dbLoop
-            case x of
-                OPEN => 
-                  do if r == [] 
-                     then
-                       OPENDB {s = n} {db = d}
-                     else
-                       Display "Invalid input"
-                     dbLoop
-                otherwise => dbLoop
-  -}   
     dbLoop {st = (n, Conn, d, r)} =
          do Just x <- GetInput | Nothing => do Display "Invalid input"
                                                dbLoop
@@ -180,10 +178,10 @@ namespace Database
                 (QUERY q) => 
                   do QUERYDB q {s = n} {db = d}
                      dbLoop
-                otherwise => do Display "Either close or query the databse."
+                otherwise => do Display "Either close or query the database."
                                 dbLoop
 
 main : IO ()
-main = run forever (dbLoop {st = ("DBase", NotConn, fromList [(0,"0")], [])})
+main = run forever (dbLoop {st = ("", NotConn, fromList [(0,"0")], [])})
 
 
