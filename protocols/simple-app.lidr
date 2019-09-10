@@ -242,8 +242,7 @@ main =
  ```
 
 * Function `run` makes the connection I mentioned above, relating
-`DBIO` instances with `IO` instances. (Overlook datatype `Fuel` for
-the moment.)
+`DBIO` instances with `IO` instances. 
 ```idris
     run : Fuel -> DBIO state -> IO ()
     run (More fuel) (Do c f) 
@@ -256,15 +255,30 @@ the moment.)
   "iterates" over the infinite sequence of commands, processing it
   step-by-step by means of function `runMachine`. 
   
-* And it does it using the _lazy_ datatype `Fuel`, that allows `run`
-  to execute DB commands one step at the time.
+* And it does it using the _lazy_ datatype `Fuel` (that we studied
+  before), that allows `run` to execute DB commands one step at the
+  time, with a `DBIO` (infinite) sequence.
+  
+* Let us take a look at the `runMachine` function. It is defined by
+  cases on `DBCmd` datatype. We will only study one of its cases. The
+  remaining ones are for you think about.
+```idris
+     runMachine : DBCmd ty inState outState -> IO ty
+     runMachine 
+      {inState = (s, NotConn, db, [])} 
+      {outState = (s', Conn, (fromList [(0, "0")]), [])} 
+      (OPENDB s') = 
+      do 
+       putStrLn ("DB " ++ s' ++ " open")
+       showDB (fromList [(0, "0")])
+```
 
-## Simple app as a web app
-
-  - A way to transform string input into a well-formed instance of (an
-  algebraic) language.
-	  -  Pretty much as we would do with a web form. 
-
+* Function `runMachine` relates a DB command and IO actions. In the
+  case of command `OPENDB s`, where `s` is a string, denoting the name
+  of the database, `runMachine` prints that the database, whose name
+  was given, is open and lists the contents of an initialized
+  database.
+  
 # Simple app full listing 
 
 ## Datatypes {.allowframebreaks}

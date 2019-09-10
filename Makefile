@@ -17,22 +17,7 @@ PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
 
 PANDOC-MARKDOWN-CMD = pandoc -f markdown -t markdown -s
 
-#all: check slides paper
-all: check slides 
-
-tcs: check tcs-slides tcs-paper
-
-tcs-paper:
-	${PANDOC-PAPER-CMD} \
-	header.md \
-	intro-tcs/intro-tcs.md ${FILES} \
-	-o tcs-notes-on-tdd.pdf
-
-tcs-slides:
-	${PANDOC-SLIDES-CMD} \
-	header-slides.md \
-	intro-tcs/intro-tcs.md ${FILES} \
-	-o tcs-notes-on-tdd-slides.pdf
+all: check slides paper
 
 paper: 
 	${PANDOC-PAPER-CMD} \
@@ -78,5 +63,3 @@ check: test
 	- idris --check -p contrib protocols/simple-app.lidr
 #	- idris --check domain-specific-commands/dsc.lidr
 #	- idris --check domain-specific-commands/ArithCmd.idr
-
-
