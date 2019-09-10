@@ -17,7 +17,8 @@ PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
 
 PANDOC-MARKDOWN-CMD = pandoc -f markdown -t markdown -s
 
-all: check slides paper
+#all: check slides paper
+all: check slides 
 
 tcs: check tcs-slides tcs-paper
 
@@ -74,7 +75,7 @@ check: test
 	- idris --check programming-with-first-class-types/pwfct.lidr
 	- idris --check streams/streams.lidr
 	- idris --check protocols/protocols.lidr
-	- idris --check protocols/simple-app.lidr
+	- idris --check -p contrib protocols/simple-app.lidr
 #	- idris --check domain-specific-commands/dsc.lidr
 #	- idris --check domain-specific-commands/ArithCmd.idr
 
