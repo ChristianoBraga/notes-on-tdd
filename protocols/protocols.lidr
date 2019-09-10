@@ -4,7 +4,7 @@
 
 - The automaton below illustrates the communication between an
 application and a database system. The intention is to express that in
-order to query a database it is necessary first to stablish a
+order to query a database it is necessary first to establish a
 connection with it and then after all queries were done, the
 connection is closed.
 

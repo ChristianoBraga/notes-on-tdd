@@ -19,7 +19,7 @@ with the REPL.)
 denoting the length of each string in the given list.
 
 - Type.
-Which should be the type for `allLengths`? Our "problem statement" has already
+Which should be the type for `allLenghts`? Our "problem statement" has already
 specified it so we just have to write it down:
 ```idris
 allLenghts : List String -> List Nat
@@ -117,9 +117,9 @@ Finally, we reach the following implementation:
 
 > module Main
 >
-> allLengths : List String -> List Nat
-> allLengths [] = []
-> allLengths (x :: xs) = (length x) :: allLengths xs
+> allLenghts : List String -> List Nat
+> allLenghts [] = []
+> allLenghts (x :: xs) = (length x) :: allLenghts xs
 
 ```
 
@@ -188,7 +188,7 @@ The first lab is to complete the code below using what we have discussed so far.
 > average str = 
 >         let numWords = wordCount str
 >             totalLength = 
->                   sum (allLengths (words str))
+>                   sum (allLenghts (words str))
 >         in ?w
 > -- Which is the type of `?w1`?
 > -- Proof search won't help you here, unfortunately...

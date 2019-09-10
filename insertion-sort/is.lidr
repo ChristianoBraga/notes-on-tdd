@@ -17,7 +17,7 @@ of the section I list your activities for this lab.
 ## Type-define-refine {.allowframebreaks}
 
 - Type
-We will use the `Vect` datatype avaiable in Idris' prelude.
+We will use the `Vect` datatype available in Idris' prelude.
 
 ```idris
 
@@ -53,7 +53,7 @@ insSort (x :: xs) = ?insSort_rhs_2
 insSort (x :: xs) = ?insSort_rhs_2
 ```
 - And why is that? Because there is no _silver bullet_ and you need to understand
-the algorithm! The informal specification is quite clear: we need to isert `x` into
+the algorithm! The informal specification is quite clear: we need to insert `x` into
 a sorted (tail) list.
 ```idris
 insSort (x :: xs) =

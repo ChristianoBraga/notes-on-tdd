@@ -142,7 +142,7 @@ that will only handle a request on properly established sessions.
   illustrate DSL with functional programming usefulness.
   
 * The issues raised here may be moved to a higher level of abstraction
-  to represent buiness processes and their refinement into code.
+  to represent business processes and their refinement into code.
   
 * There is off the shelf technology to support this approach.
 
