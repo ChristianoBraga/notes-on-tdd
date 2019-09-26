@@ -353,18 +353,17 @@ a function that expects a number and then behaves as `delta`.
 
 - Total functions are such that, for all well-typed inputs, does one
 of the following: 
-  - Terminates with a well-typed result 
-  - Produces a non-empty finite prefix of a well-typed infinite result in finite time
-We can describe total functions as either terminating or
-productive. 
-  - The halting problem is the difficulty of determining 
-whether a specific program terminates or not, and, thanks to Alan
-Turing, we know that it’s impossible in general to write a program
-that solves the halting problem. 
-  - In other words, Idris can’t determine
-whether one of these conditions holds for all total
-functions. Instead, it makes a conservative approximation by
-analyzing a function’s syntax.
+  - Terminates with a well-typed result. 
+  - Produces a non-empty finite prefix of a well-typed infinite result
+  in finite time. We can describe total functions as either terminating
+  or productive. 
+  - The halting problem is the difficulty of determining whether a
+  specific program terminates or not, and, thanks to Alan Turing, we
+  know that it’s impossible in general to write a program that solves
+  the halting problem.
+  - In other words, Idris can’t determine whether one of these
+  conditions holds for all total functions. Instead, it makes a
+  conservative approximation by analyzing a function’s syntax.
 
 - Type casting. We have used `cast` many times in order to _inject_
   our values from one type into another.
