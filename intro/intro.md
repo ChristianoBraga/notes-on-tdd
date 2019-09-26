@@ -1,4 +1,7 @@
-# Introduction
+## 
+
+![Type-driven Cybersecurity](./intro/logo.png "Type-driven
+Cybersecurity"){.center}\
 
 ## Contact information
 
@@ -11,7 +14,33 @@ Universidade Federal Fluminense
 [http://www.ic.uff.br/~cbraga](http://www.ic.uff.br/~cbraga)  
 [Lattes Curriculum Vitae](http://lattes.cnpq.br/0535266455387139)  
 
-## Context {.allowframebreaks}
+## Objective
+
+* The objective of this workshop is to brainstorm about R&D
+  opportunities between TCS and the Theoretical Computer Science 
+  Research Group at UFF, in particular exploring the type-driven
+  development (TDD) approach.
+  
+* Our hypothesis is that the TDD approach can be **effectively**
+  applied to either or both Cybersecurity and Business 4.0 enterprises
+  at TCS with **clear ROI** as safety and security, for instance,
+  would be increased in TCS solutions, based on public TCS documents.
+   - [TCS research website](https://www.tcs.com/tcs-research)
+   - [Winning in a Business 4.0 World](https://www.business4.tcs.com/content/dam/tcs_b4/pdf/winning-in-a-business-4-0-world.pdf)
+
+## Type-driven development in a nutshell
+
+* Domain-specific languages
+  - Focus on what is relevant to the client.
+* Program transformation
+  - Relates client terminology to the available solutions.
+* Structural and behavioral type-safety
+  - Allows for both _data_ soundness and _process_ soundness.
+* Transparent use of rigorous program verification techniques.
+  - Seamless integration of _mathematically rigorous_ techniques into
+  the development process. 
+
+## Cybersecurity 
 
 * Current distributed applications ecosystem: IOT, Cloud, Web...  
 
@@ -28,7 +57,7 @@ txtSQL = "SELECT * FROM Users WHERE UserId = "
   If `txtUserId` is equal to `105 OR 1=1`, which is always true, a
   malicious user may access _all_ user information from a database.  
 
-## Solutions {.allowframebreaks}
+## Solutions 
 
 * SQL parameters: additional values are passed to the query.  
 * Escaping functions: they transform the input string into a "safe"
@@ -46,7 +75,6 @@ txtSQL = "SELECT * FROM Users WHERE UserId = "
 	  1. Create a connection.
 	  1. Make sure the connection was established.
 	  1. Prepare an SQL statement.
-	  1. Make sure that variables are bound.
 	  1. Execute the query.
 	  1. Process the result of the query.
 	  1. Close connection.
@@ -91,66 +119,91 @@ txtSQL = "SELECT * FROM Users WHERE UserId = "
 
 ## An example DSL ii {.allowframbreaks .shrink}
 
-* The database protocol can be captured as a type.  
-![Database protocol](./intro/db-protocol.png "Database protocol")
+* The database protocol can be captured as a type.
 
-## An example DSL iii {.allowframbreaks}
+![Database protocol](./protocols/db-protocol.png "Database protocol")
 
-* For example, the step `SQLiteConnected` step has type
-```haskell
-data SQLiteConnected : Type where
-     SQLConnection : ConnectionPtr -> SQLiteConnected
-```
+* A program that tries to make a query before opening a connection is
+  **ill-typed**.
+  - This is checked at compile time not run time!
+  - Your client does not become aware of your errors!
 
-* The DSL has constructions for defining typed form handlers such as 
-```haskell
-handleRequest : CGIProg
-     [SESSION (SessionRes SessionUninitialised),
-      SQLITE ()] ()
-```
-that will only handle a request on properly established sessions.
+<!-- ## An example DSL iii {.allowframbreaks} -->
 
-## Programming languages support for DSL development
+<!-- * For example, the step `SQLiteConnected` step has type -->
+<!-- ```haskell -->
+<!-- data SQLiteConnected : Type where -->
+<!--      SQLConnection : ConnectionPtr -> SQLiteConnected -->
+<!-- ``` -->
 
-* Essentially, there are two approaches for DSL-based development:  
-	1. Transformational approach:  
-	  DSL program $\xrightarrow{\text{parsing}}$ Protocol
-	  data type instance  
-	  $\xrightarrow{\text{transformation}}$ Web (micro)service framework.
+<!-- * The DSL has constructions for defining typed form handlers such as  -->
+<!-- ```haskell -->
+<!-- handleRequest : CGIProg -->
+<!--      [SESSION (SessionRes SessionUninitialised), -->
+<!--       SQLITE ()] () -->
+<!-- ``` -->
+<!-- that will only handle a request on properly established sessions. -->
 
-	2. Embedded DSL approach:  
-	  The programming languages has support the definition of notation and
-	  typing.  
+<!-- ## Programming languages support for DSL development -->
+
+<!-- * Essentially, there are two approaches for DSL-based development:   -->
+<!-- 	1. Transformational approach:   -->
+<!-- 	  DSL program $\xrightarrow{\text{parsing}}$ Protocol -->
+<!-- 	  data type instance   -->
+<!-- 	  $\xrightarrow{\text{transformation}}$ Web (micro)service framework. -->
+
+<!-- 	2. Embedded DSL approach:   -->
+<!-- 	  The programming languages has support the definition of notation and -->
+<!-- 	  typing.   -->
 	  
-* Programming languages that support approach #i are [Racket](http://racket-lang.org) and [Maude](http://maude.cs.uiuc.edu).
-* Programming languages that support approach #ii are [Idris](http://www.idris-lang.org), [Lean](https://leanprover.github.io/) and [Haskell](http://haskell.org).
+<!-- * Programming languages that support approach #i are [Racket](http://racket-lang.org) and [Maude](http://maude.cs.uiuc.edu). -->
+<!-- * Programming languages that support approach #ii are [Idris](http://www.idris-lang.org), [Lean](https://leanprover.github.io/) and [Haskell](http://haskell.org). -->
 
+## Business 4.0
+
+Critical business behaviors:
+
+* Driving mass personalization  
+  - Personalizing products and services to a market of one customer,
+    often even of one transaction, and at scale. 
+* Creating exponential value
+  - Adopting business models that leverage value from transactions at
+    multiple levels and address new markets. 
+* Leveraging ecosystems  
+  - Collaborating with partners inside and outside the supply chain to
+    create new products and services.
+* Embracing risk  
+  – Moving beyond rigid planning and operational barriers with an
+    agile strategic approach.
+	
+## Relating TDD and Buz4.0
+
+* Mass personalization is domain-specific programming!
+
+* Different business models may be captured as types and conformance
+  to the business model becomes a programming practice!
+  
+* Type _composition_ is natural in type-driven development!
+
+* Safety and risk walk hand-in-hand as program transformation allows us to
+  cope with agile strategies in a type-safe setting!
+  
 ## Our research approach
 
-* To program services with domain-specific languages, implemented on top of
-  strongly typed functional languages.  
+* To program with domain-specific languages, implemented on top of
+  strongly typed functional languages.
   
 * To develop and apply program analysis techniques to DSL-based
-  approaches to Web development. 
+  approaches to software development. 
   
-* More specifically, to develop Web programming support in Idris.
+* More specifically, to develop and apply cybersecurity and business
+  4.0 enabled-techniques in Idris.
 	 
-## Summing up
-
-* We have chosen an important technical problem in web development
-  (SQL injection), that may cause loss of millions of dollars, to
-  illustrate DSL with functional programming usefulness.
-  
-* The issues raised here may be moved to a higher level of abstraction
-  to represent business processes and their refinement into code.
-  
-* There is off the shelf technology to support this approach.
-
 ## This short-course
 
 * In this short-course we will address some of the basic concepts of
   the type-driven approach that gives support to the development
-  scenario outlined in this section.
+  scenario outlined here.
 
 ## Suggested reading
 

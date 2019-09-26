@@ -612,6 +612,7 @@ main =
 > main : IO ()
 > main = 
 >  run forever 
->       (dbLoop {st = ("", NotConn, fromList [(0,"0")], [])})
+>       (dbLoop {st = ("", NotConn, 
+>                      fromList [(0,"0")], [])})
  
  ```

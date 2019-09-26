@@ -9,6 +9,14 @@ FILES = intro/intro.md \
 	protocols/simple-app.lidr
 #	domain-specific-commands/dsc.lidr 
 
+TCS-FILES = intro/intro.md \
+	the-need-for-types/tnft.lidr \
+	the-need-for-dependent-types/tnfdt.lidr \
+	streams/streams.lidr \
+	protocols/protocols.lidr \
+	protocols/simple-app.lidr
+#	domain-specific-commands/dsc.lidr 
+
 PANDOC-PAPER-CMD = pandoc -N --toc -f markdown -t latex -s
 
 PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
@@ -17,7 +25,13 @@ PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
 
 PANDOC-MARKDOWN-CMD = pandoc -f markdown -t markdown -s
 
-all: check slides paper
+all: check slides paper tcs-slides
+
+tcs-slides:
+	${PANDOC-SLIDES-CMD} \
+	tcs-header-slides.md \
+	${TCS-FILES} \
+        -o tcs-notes-on-tdd-slides.pdf
 
 paper: 
 	${PANDOC-PAPER-CMD} \
@@ -33,13 +47,19 @@ slides:
         -o notes-on-tdd-slides.pdf
 
 test:
-	#Checking for required tools in macOS Mojave and Linux Ububtu.
+	@echo ==============================================
+	@echo Checking for required tools in macOS Mojave and Linux Ububtu.
+	@echo ==============================================
 	@test -x /usr/local/bin/idris || test -x ${HOME}/.cabal/bin/idris
 	@test -x /usr/local/texlive/*/bin/x86_64-*/pdflatex
-	#OK
+	@echo ==============================================
+	@echo OK
+	@echo ==============================================
 
 check: test
-	#Checking for code files.
+	@echo ==============================================
+	@echo Checking for code files.
+	@echo ==============================================
 	- idris --check the-need-for-types/tnft.lidr
 	@echo ==============================================
 	@echo Checking for tnft.lidr should give an error...
