@@ -34,7 +34,7 @@ allLenghts : List String -> List Nat
 Holes: Main.allLenghts
 ```
 
-- There is no surprise with the type but there is `Hole` in our program. Obviously
+- There is no surprise with the type but there is a `Hole` in our program. Obviously
 is because we did not declare the equations that define `allLenghts`. This may
 also occur when Idris fails to type-check a given program.
 

@@ -1,8 +1,3 @@
-## 
-
-![Type-driven Cybersecurity](./intro/logo.png "Type-driven
-Cybersecurity"){.center}\
-
 ## Contact information
 
 **Christiano Braga**  
@@ -14,19 +9,7 @@ Universidade Federal Fluminense
 [http://www.ic.uff.br/~cbraga](http://www.ic.uff.br/~cbraga)  
 [Lattes Curriculum Vitae](http://lattes.cnpq.br/0535266455387139)  
 
-## Objective
-
-* The objective of this workshop is to brainstorm about R&D
-  opportunities between TCS and the Theoretical Computer Science 
-  Research Group at UFF, in particular exploring the type-driven
-  development (TDD) approach.
-  
-* Our hypothesis is that the TDD approach can be **effectively**
-  applied to either or both Cybersecurity and Business 4.0 enterprises
-  at TCS with **clear ROI** as safety and security, for instance,
-  would be increased in TCS solutions, based on public TCS documents.
-   - [TCS research website](https://www.tcs.com/tcs-research)
-   - [Winning in a Business 4.0 World](https://www.business4.tcs.com/content/dam/tcs_b4/pdf/winning-in-a-business-4-0-world.pdf)
+# Introduction
 
 ## Type-driven development in a nutshell
 
@@ -159,34 +142,34 @@ txtSQL = "SELECT * FROM Users WHERE UserId = "
 <!-- * Programming languages that support approach #i are [Racket](http://racket-lang.org) and [Maude](http://maude.cs.uiuc.edu). -->
 <!-- * Programming languages that support approach #ii are [Idris](http://www.idris-lang.org), [Lean](https://leanprover.github.io/) and [Haskell](http://haskell.org). -->
 
-## Business 4.0
+<!-- ## Business 4.0 -->
 
-Critical business behaviors:
+<!-- Critical business behaviors: -->
 
-* Driving mass personalization  
-  - Personalizing products and services to a market of one customer,
-    often even of one transaction, and at scale. 
-* Creating exponential value
-  - Adopting business models that leverage value from transactions at
-    multiple levels and address new markets. 
-* Leveraging ecosystems  
-  - Collaborating with partners inside and outside the supply chain to
-    create new products and services.
-* Embracing risk  
-  – Moving beyond rigid planning and operational barriers with an
-    agile strategic approach.
+<!-- * Driving mass personalization   -->
+<!--   - Personalizing products and services to a market of one customer, -->
+<!--     often even of one transaction, and at scale.  -->
+<!-- * Creating exponential value -->
+<!--   - Adopting business models that leverage value from transactions at -->
+<!--     multiple levels and address new markets.  -->
+<!-- * Leveraging ecosystems   -->
+<!--   - Collaborating with partners inside and outside the supply chain to -->
+<!--     create new products and services. -->
+<!-- * Embracing risk   -->
+<!--   – Moving beyond rigid planning and operational barriers with an -->
+<!--     agile strategic approach. -->
 	
-## Relating TDD and Buz4.0
+<!-- ## Relating TDD and Buz4.0 -->
 
-* Mass personalization is domain-specific programming!
+<!-- * Mass personalization is domain-specific programming! -->
 
-* Different business models may be captured as types and conformance
-  to the business model becomes a programming practice!
+<!-- * Different business models may be captured as types and conformance -->
+<!--   to the business model becomes a programming practice! -->
   
-* Type _composition_ is natural in type-driven development!
+<!-- * Type _composition_ is natural in type-driven development! -->
 
-* Safety and risk walk hand-in-hand as program transformation allows us to
-  cope with agile strategies in a type-safe setting!
+<!-- * Safety and risk walk hand-in-hand as program transformation allows us to -->
+<!--   cope with agile strategies in a type-safe setting! -->
   
 ## Our research approach
 
@@ -196,8 +179,8 @@ Critical business behaviors:
 * To develop and apply program analysis techniques to DSL-based
   approaches to software development. 
   
-* More specifically, to develop and apply cybersecurity and business
-  4.0 enabled-techniques in Idris.
+<!-- * More specifically, to develop and apply cybersecurity and business -->
+<!--   4.0 enabled-techniques in Idris. -->
 	 
 ## This short-course
 

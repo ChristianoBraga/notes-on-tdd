@@ -1,13 +1,12 @@
 FILES = intro/intro.md \
-	the-need-for-types/tnft.lidr \
-	type-define-refine/tdr.lidr \
+	golden-questions-to-dt/gqfdt.md \
 	the-need-for-dependent-types/tnfdt.lidr \
+	type-define-refine/tdr.lidr \
 	insertion-sort/is.lidr \
 	programming-with-first-class-types/pwfct.lidr \
 	streams/streams.lidr \
 	protocols/protocols.lidr \
 	protocols/simple-app.lidr
-#	domain-specific-commands/dsc.lidr 
 
 TCS-FILES = intro/intro.md \
 	the-need-for-types/tnft.lidr \
@@ -15,7 +14,6 @@ TCS-FILES = intro/intro.md \
 	streams/streams.lidr \
 	protocols/protocols.lidr \
 	protocols/simple-app.lidr
-#	domain-specific-commands/dsc.lidr 
 
 PANDOC-PAPER-CMD = pandoc -N --toc -f markdown -t latex -s
 
@@ -25,13 +23,7 @@ PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
 
 PANDOC-MARKDOWN-CMD = pandoc -f markdown -t markdown -s
 
-all: check slides paper tcs-slides
-
-tcs-slides:
-	${PANDOC-SLIDES-CMD} \
-	tcs-header-slides.md \
-	${TCS-FILES} \
-        -o tcs-notes-on-tdd-slides.pdf
+all: check slides paper 
 
 paper: 
 	${PANDOC-PAPER-CMD} \
@@ -51,7 +43,7 @@ test:
 	@echo Checking for required tools in macOS Mojave and Linux Ububtu.
 	@echo ==============================================
 	@test -x /usr/local/bin/idris || test -x ${HOME}/.cabal/bin/idris
-	@test -x /usr/local/texlive/*/bin/x86_64-*/pdflatex
+	@test -x /usr/local/texlive/2019/bin/x86_64-*/pdflatex
 	@echo ==============================================
 	@echo OK
 	@echo ==============================================
@@ -59,10 +51,6 @@ test:
 check: test
 	@echo ==============================================
 	@echo Checking for code files.
-	@echo ==============================================
-	- idris --check the-need-for-types/tnft.lidr
-	@echo ==============================================
-	@echo Checking for tnft.lidr should give an error...
 	@echo ==============================================
 	- idris --check the-need-for-types/delta-fix.lidr
 	@echo ==============================================
