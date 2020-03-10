@@ -63,10 +63,10 @@ insSort (x :: xs) =
 - We can now ask the system to help us with `?insSort_rhs_2` in this context by
 pressing Ctrl+Alt+L on it. Here is what it creates:
 ```idris
-insSort_rhs_2 : (x : elem) -> (xs : Vect len elem) -> 
+insSort_rhs_2 : (x : elem) -> (xs : Vect len elem) ->
              (l : Vect len elem) -> Vect (S len) elem
-insSort (x :: xs) = 
-  let l = insSort xs 
+insSort (x :: xs) =
+  let l = insSort xs
   in (insSort_rhs_2 x xs l)
 ```
 It generates a _stub_ of a function with all the variables in the context.
@@ -83,7 +83,7 @@ already (overly)defined its type for us. So let us add a clause on `insert`, and
 case-split `l`. It leaves us with the following code once we search for a proof
 for hole 1.
 ```idris
-insert : (x : elem) -> (l : Vect len elem) 
+insert : (x : elem) -> (l : Vect len elem)
                     -> Vect (S len) elem
 insert x [] = [x]
 insert x (y :: xs) = ?insSort_rhs_2
@@ -129,7 +129,7 @@ we will not explore it any further in this short-course.
 
 ```idris
 
-> insert : Ord elem => (x : elem) -> 
+> insert : Ord elem => (x : elem) ->
 >              (l : Vect len elem) -> Vect (S len) elem
 > insert x [] = [x]
 > insert x (y :: xs) = ?insert_rhs
@@ -145,4 +145,4 @@ we will not explore it any further in this short-course.
 - So, finally, here is what you should do:
 1. Perform all the steps described above until you reach the code above.
 1. Replace the meta-variable with the appropriate `if then else` code or search
-for Ctrl+Alt+M (to generate a `case`-based code) command on the web and try i.t
+for Ctrl+Alt+M (to generate a `case`-based code) command.
