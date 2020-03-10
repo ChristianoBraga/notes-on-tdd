@@ -1,3 +1,3 @@
 % Notes on type-driven development with Idris
 % Christiano Braga
-% September, 2019
+% March, 2020

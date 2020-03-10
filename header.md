@@ -1,10 +1,8 @@
 ---
-documentclass: article
+documentclass: llncs
+classoption: a4wide
 title: Notes on type-driven development with Idris
-author: | 
- \textbf{Christiano Braga}\
- \large Universidade Federal Fluminense\
- \texttt{cbraga@ic.uff.br}
+author: Christiano Braga 
 date: \today
 abstract: | 
   In these notes I explore the type-driven software development approach
@@ -22,4 +20,5 @@ header-includes:
     - "\\usepackage{draftwatermark}"
 	- "\\SetWatermarkLightness{0.95}"
     - "\\pagestyle{plain}"
+	- "\\institute{Instituto de Computação, Universidade Federal Fluminense \\and FADoSS Research Group, Universidad Complutense de Madrid \\and COIN Academic Partner, Tata Consultanncy Services Brazil}"
 ---

@@ -15,11 +15,11 @@ TCS-FILES = intro/intro.md \
 	protocols/protocols.lidr \
 	protocols/simple-app.lidr
 
-PANDOC-PAPER-CMD = pandoc -N --toc -f markdown -t latex -s
+PANDOC-PAPER-CMD = pandoc -N --toc -f markdown -t latex -s 
 
 PANDOC-SLIDES-CMD = pandoc -t beamer --slide-level=2 \
 		        -V theme:metropolis \
-			-V institute:"Universidade Federal Fluminense" 
+			-V institute:"Instituto de Computação, Universidade Federal Fluminense\\\FADoSS Research Group, Universidad Complutense de Madrid\\\COIN Academic Partner, Tata Consultancy Services Brazil" 
 
 PANDOC-MARKDOWN-CMD = pandoc -f markdown -t markdown -s
 
